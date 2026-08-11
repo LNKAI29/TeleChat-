@@ -14,20 +14,20 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js 22
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: 'npm'
 
-      - name: Create Mock Env File
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Create Env File
         run: |
           touch .env
           echo "VITE_SUPABASE_URL=https://placeholder.supabase.co" >> .env
           echo "VITE_SUPABASE_ANON_KEY=placeholder" >> .env
-
-      - name: Install Dependencies
-        run: npm ci
 
       - name: Build Web Application
         run: npm run build
@@ -40,18 +40,17 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
-          cache: 'gradle'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
 
       - name: Make Gradlew Executable
         run: chmod +x android/gradlew
 
-      - name: Build Release APK and AAB
-        env:
-          GRADLE_OPTS: "-Dorg.gradle.jvmargs='-Xmx4096m -XX:MaxMetaspaceSize=1024m -Dfile.encoding=UTF-8'"
+      - name: Build APK & AAB
         run: |
           cd android
-          ./gradlew assembleRelease --no-daemon --stacktrace
-          ./gradlew bundleRelease --no-daemon --stacktrace
+          ./gradlew assembleRelease bundleRelease --no-daemon
 
       - name: Upload Release APK
         uses: actions/upload-artifact@v4
