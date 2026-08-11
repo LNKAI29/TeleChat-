@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">TeleChat</string>
+    <string name="title_activity_main">TeleChat</string>
+    <string name="package_name">com.lnkofficial.telechat</string>
+    <string name="custom_url_scheme">com.lnkofficial.telechat</string>
+</resources>
