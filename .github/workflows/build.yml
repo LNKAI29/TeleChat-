@@ -44,6 +44,12 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
 
+      - name: Ensure Release Keystore Exists
+        run: |
+          if [ ! -f android/app/release.keystore ]; then
+            keytool -genkey -v -keystore android/app/release.keystore -alias telechat -keyalg RSA -keysize 2048 -validity 10000 -storepass telechatsecret -keypass telechatsecret -dname "CN=TeleChat, OU=LNK, O=LNK, L=Colombo, ST=Western, C=LK"
+          fi
+
       - name: Make Gradlew Executable
         run: chmod +x android/gradlew
 
