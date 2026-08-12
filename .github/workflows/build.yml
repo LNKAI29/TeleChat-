@@ -25,9 +25,12 @@ jobs:
 
       - name: Create Env File
         run: |
-          touch .env
-          echo "VITE_SUPABASE_URL=https://placeholder.supabase.co" >> .env
-          echo "VITE_SUPABASE_ANON_KEY=placeholder" >> .env
+          echo "VITE_SUPABASE_PROJECT_ID=ygyurkeumxapomxtfidm" > .env
+          echo "VITE_SUPABASE_PUBLISHABLE_KEY=sb_publishable_xuhIAMs89HP93NC2x0o4Zw_21I6-oRg" >> .env
+          echo "VITE_SUPABASE_URL=https://ygyurkeumxapomxtfidm.supabase.co" >> .env
+          echo "SUPABASE_PROJECT_ID=ygyurkeumxapomxtfidm" >> .env
+          echo "SUPABASE_PUBLISHABLE_KEY=sb_publishable_xuhIAMs89HP93NC2x0o4Zw_21I6-oRg" >> .env
+          echo "SUPABASE_URL=https://ygyurkeumxapomxtfidm.supabase.co" >> .env
 
       - name: Build Web Application
         run: npm run build
